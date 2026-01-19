@@ -1,0 +1,190 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.assignment</groupId>
+    <artifactId>SignUpAutomation</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>SignUpAutomation</name>
+
+    <!-- Centralized versions & defaults -->
+    <properties>
+        <!-- Java toolchain -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Lib versions -->
+        <selenium.version>4.24.0</selenium.version>
+        <testng.version>7.10.2</testng.version>
+        <wdm.version>5.9.2</wdm.version> <!-- If your org bans 5.9.2, tell me and I'll bump to a newer approved version -->
+        <log4j2.version>2.24.3</log4j2.version>
+        <extent.version>5.1.1</extent.version>
+        <commons-lang3.version>3.17.0</commons-lang3.version>
+        <jackson.version>2.17.2</jackson.version>
+        <surefire.version>3.2.5</surefire.version>
+
+        <!-- Define these so IntelliJ stops showing "Cannot resolve symbol" -->
+        <headless>false</headless>
+        <signup.url>http://jt-dev.azurewebsites.net/#/SignUp</signup.url>
+    </properties>
+
+    <!-- Force all Jackson artifacts to a safe version -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+
+
+        <!-- Bind SLF4J to Log4j2 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j2-impl</artifactId>
+            <version>2.24.3</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!-- WebDriverManager (exclude old Jackson to avoid 2.10.3) -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${wdm.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Bring back safe Jackson (managed by BOM above) -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+
+        <!-- TestNG -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Log4j2 (console + rolling file logs) -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+
+        <!-- ExtentReports (HTML reports) -->
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>${extent.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- (Optional) commons-lang3 to override vulnerable transitive versions if any show up -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <!-- Optional utility -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Java 17 -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- Run TestNG tests via `mvn test` -->
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <!-- These properties now have defaults in <properties>, but can be overridden at runtime -->
+                    <!-- Example: mvn -Dheadless=true -Dsignup.url=http://... test -->
+                    <systemProperties>
+                        <property>
+                            <name>headless</name>
+                            <value>${headless}</value>
+                        </property>
+                        <property>
+                            <name>signup.url</name>
+                            <value>${signup.url}</value>
+                        </property>
+                    </systemProperties>
+                    <useSystemClassLoader>true</useSystemClassLoader>
+                </configuration>
+            </plugin>
+
+            <!-- Ensure resources (log4j2.xml) are on classpath -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

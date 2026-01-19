@@ -1,0 +1,44 @@
+[2026-01-17 16:11:42.420] INFO  SignUpTest - Setting up ChromeDriver (WebDriverManager) and options...
+[2026-01-17 16:11:44.319] INFO  SignUpTest - Launching Chrome...
+[2026-01-17 16:11:50.788] INFO  SignUpTest - Initializing SignUpPage
+[2026-01-17 16:11:50.898] INFO  SignUpTest - Starting SignUp test
+[2026-01-17 16:11:50.899] INFO  SignUpTest - Opening page
+[2026-01-17 16:12:04.542] INFO  SignUpTest - Validating languages
+[2026-01-17 16:12:06.431] INFO  SignUpTest - Selecting language: English
+[2026-01-17 16:12:08.811] INFO  SignUpTest - Filling details: Name/Org/Email
+[2026-01-17 16:12:12.725] INFO  SignUpTest - Accepting terms
+[2026-01-17 16:12:38.851] INFO  SignUpTest - Submitting form
+[2026-01-17 16:12:44.472] INFO  SignUpTest - Verifying confirmation message
+[2026-01-17 16:12:44.571] INFO  SignUpTest - Test completed successfully
+[2026-01-17 16:12:44.594] INFO  SignUpTest - Closing browser...
+[2026-01-17 16:23:49.125] INFO  SignUpTest - Setting up ChromeDriver (WebDriverManager) and options...
+[2026-01-17 16:23:50.035] INFO  SignUpTest - Launching Chrome...
+[2026-01-17 16:23:54.394] INFO  SignUpTest - Initializing SignUpPage
+[2026-01-17 16:23:54.467] INFO  SignUpTest - Starting SignUp test
+[2026-01-17 16:23:54.468] INFO  SignUpTest - Opening page
+[2026-01-17 16:24:07.251] INFO  SignUpTest - Validating languages
+[2026-01-17 16:24:10.185] INFO  SignUpTest - Selecting language: English
+[2026-01-17 16:24:13.115] INFO  SignUpTest - Filling details: Name/Org/Email
+[2026-01-17 16:24:15.685] INFO  SignUpTest - Accepting terms
+[2026-01-17 16:24:42.269] INFO  SignUpTest - Submitting form
+[2026-01-17 16:24:48.119] INFO  SignUpTest - Verifying confirmation message
+[2026-01-17 16:24:48.198] INFO  SignUpTest - Test completed successfully
+[2026-01-17 16:24:48.224] INFO  SignUpTest - Closing browser...
+[2026-01-17 16:31:04.947] INFO  Utils - [TestNG] Running:
+  C:\Users\suojha\AppData\Local\JetBrains\IntelliJIdea2025.3\temp-testng-customsuite.xml
+
+[2026-01-17 16:31:05.457] INFO  SignUpTest - Setting up ChromeDriver (WebDriverManager) and options...
+[2026-01-17 16:31:06.215] INFO  WebDriverManager - Using chromedriver 143.0.7499.192 (resolved driver for Chrome 143)
+[2026-01-17 16:31:06.271] INFO  WebDriverManager - Exporting webdriver.chrome.driver as C:\Users\suojha\.cache\selenium\chromedriver\win64\143.0.7499.192\chromedriver.exe
+[2026-01-17 16:31:06.298] INFO  SignUpTest - Launching Chrome...
+[2026-01-17 16:31:10.424] INFO  SignUpTest - Initializing SignUpPage
+[2026-01-17 16:31:10.504] INFO  SignUpTest - Starting SignUp test
+[2026-01-17 16:31:10.504] INFO  SignUpTest - Opening page
+[2026-01-17 16:31:24.399] INFO  SignUpTest - Validating languages
+[2026-01-17 16:31:26.470] INFO  SignUpTest - Selecting language: English
+[2026-01-17 16:31:28.957] INFO  SignUpTest - Filling details: Name/Org/Email
+[2026-01-17 16:31:31.844] INFO  SignUpTest - Accepting terms
+[2026-01-17 16:31:57.466] INFO  SignUpTest - Submitting form
+[2026-01-17 16:32:02.496] INFO  SignUpTest - Verifying confirmation message
+[2026-01-17 16:32:02.570] INFO  SignUpTest - Test completed successfully
+[2026-01-17 16:32:02.602] INFO  SignUpTest - Closing browser...
